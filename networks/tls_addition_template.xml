@@ -1,0 +1,14 @@
+<additional>
+    <tlLogic id="initial_id" programID="my_config_tls" offset="0" type="static">
+        <phase duration="10" state="rrrGrrrrrrrGrrrr"/>
+        <phase duration="10" state="GGGrrrrrrrrrGGGr"/>
+        <phase duration="10" state="rrrrrrrGrrrrrrrG"/>
+        <phase duration="10" state="rrrrGGGrrrrrGGGr"/>
+        <phase duration="10" state="GGGGrrrrrrrrrrrr"/>
+        <phase duration="10" state="rrrrGGGGrrrrrrrr"/>
+        <phase duration="10" state="rrrrrrrrGGGGrrrr"/>
+        <phase duration="10" state="rrrrrrrrrrrrGGGG"/>
+    </tlLogic>
+</additional>
+
+

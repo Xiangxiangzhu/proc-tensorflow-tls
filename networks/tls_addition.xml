@@ -1,0 +1,12 @@
+<additional>
+    <tlLogic id="gneJ2" offset="0" programID="my_config_tls" type="static">
+        <phase duration="10" state="GrrGGrrrGrrGGrrr" />
+        <phase duration="10" state="GGGrGrrrGGGrGrrr" />
+        <phase duration="10" state="GrrrGrrGGrrrGrrG" />
+        <phase duration="10" state="GrrrGGGrGrrrGGGr" />
+        <phase duration="10" state="GGGGGrrrGrrrGrrr" />
+        <phase duration="10" state="GrrrGGGGGrrrGrrr" />
+        <phase duration="10" state="GrrrGrrrGGGGGrrr" />
+        <phase duration="10" state="GrrrGrrrGrrrGGGG" />
+    </tlLogic>
+</additional>

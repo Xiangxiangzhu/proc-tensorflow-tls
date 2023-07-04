@@ -3,13 +3,16 @@ import random
 
 from src.rlagent import RLAgent
 
+
 class DQNAgent(RLAgent):
-    def __init__(self, networks, epsilon, exp_replay, n_actions, n_steps, n_batch, n_exp_replay, gamma, rl_stats, mode, updates):
-        super().__init__(networks, epsilon, exp_replay, n_actions, n_steps, n_batch, n_exp_replay, gamma, rl_stats, mode, updates) 
-        
+    def __init__(self, networks, epsilon, exp_replay, n_actions, n_steps, n_batch, n_exp_replay, gamma, rl_stats, mode,
+                 updates):
+        super().__init__(networks, epsilon, exp_replay, n_actions, n_steps, n_batch, n_exp_replay, gamma, rl_stats,
+                         mode, updates)
+
     def get_action(self, state):
-        #get newest weights before acting
-        #get q values of current state
+        # get newest weights before acting
+        # get q values of current state
         if np.random.uniform(0.0, 1.0) < self.epsilon:
             ###act randomly
             action = np.random.randint(self.n_actions)
@@ -17,7 +20,7 @@ class DQNAgent(RLAgent):
             if self.mode == 'train':
                 self.retrieve_weights('online')
             ###act greedily
-            q_state = self.networks.forward(state[np.newaxis,...], 'online')
+            q_state = self.networks.forward(state[np.newaxis, ...], 'online')
             action = np.argmax(q_state)
         ###return action integer
         return action
@@ -30,7 +33,7 @@ class DQNAgent(RLAgent):
         self.networks.backward(batch_inputs, batch_targets)
         self.rl_stats['updates'] += 1
         self.rl_stats['n_exp'] -= 1
-        #send online weights for actor processes
+        # send online weights for actor processes
         self.send_weights('online')
 
         if self.rl_stats['updates'] % update_freq == 0:
@@ -51,10 +54,10 @@ class DQNAgent(RLAgent):
                 states.append(exp['s'])
                 ###normalize reward by comparison to maximum reward 
                 ###agent has experienced across all actors
-                
-        #batch forward q_s estimate
+
+        # batch forward q_s estimate
         Q_S = self.networks.forward(np.stack(states), 'target')
-        #batch forward bootstrap
+        # batch forward bootstrap
         R = self.next_state_bootstrap(np.stack(next_states), terminals)
 
         i = 0
@@ -66,38 +69,38 @@ class DQNAgent(RLAgent):
                 actions.append(exp['a'])
                 ###normalize reward by comparison to maximum reward 
                 ###agent has experienced across all actors
-                rewards.append(exp['r']/max_r)
-            #get q values 
-            q_s = Q_S[i:i+len(trajectory)]
+                rewards.append(exp['r'] / max_r)
+            # get q values
+            q_s = Q_S[i:i + len(trajectory)]
             i += len(trajectory)
-            p_exps = self.process_trajectory( states, actions, 
-                                              rewards, r, q_s )
+            p_exps = self.process_trajectory(states, actions,
+                                             rewards, r, q_s)
             ###add processed experiences from trajectory to batch
             processed_exps.extend(p_exps)
         ###account for n step returns, randomly select batch for training
         if self.n_steps > 1:
             processed_exps = random.sample(processed_exps, self.n_batch)
-        batch_inputs = np.squeeze(np.stack([ e['s'] for e in processed_exps]))
-        batch_targets =  np.stack([ e['target'] for e in processed_exps])
+        batch_inputs = np.squeeze(np.stack([e['s'] for e in processed_exps]))
+        batch_targets = np.stack([e['target'] for e in processed_exps])
         return batch_inputs, batch_targets
 
     def next_state_bootstrap(self, next_states, terminals):
-        
-        q_next_s = self.networks.forward(next_states, 'target')
-        R = np.amax(q_next_s, axis=-1) 
 
-        return [ 0.0 if t is True else r for t, r in zip(terminals, R)]
-                                                                                         
+        q_next_s = self.networks.forward(next_states, 'target')
+        R = np.amax(q_next_s, axis=-1)
+
+        return [0.0 if t is True else r for t, r in zip(terminals, R)]
+
     def process_trajectory(self, states, actions, rewards, R, q_s):
-                                                                                         
+
         targets = self.compute_targets(rewards, R)
-                                                                                         
+
         exps = []
         for i in range(len(actions)):
             q_s[i, actions[i]] = targets[i]
-            exps.append({'target':q_s[i], 's':states[i]})
+            exps.append({'target': q_s[i], 's': states[i]})
         return exps
-    
+
     def set_params(self, nettype, weights):
         self.networks.set_weights(weights, nettype)
 
@@ -109,4 +112,3 @@ class DQNAgent(RLAgent):
 
     def retrieve_weights(self, nettype):
         self.networks.set_weights(self.rl_stats[nettype], nettype)
-

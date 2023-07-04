@@ -1,10 +1,12 @@
 import os
 import numpy as np
-#import tensorflow as tf
-#import tensorflow.keras.backend as K
 
-#from tensorflow.keras.models import Model
-#from tensorflow.keras.layers import Input, Dense, Reshape, Flatten
+
+# import tensorflow as tf
+# import tensorflow.keras.backend as K
+
+# from tensorflow.keras.models import Model
+# from tensorflow.keras.layers import Input, Dense, Reshape, Flatten
 
 class NeuralNet:
     def __init__(self, input_d, hidden_d, hidden_act, output_d, output_act, learner=False):
