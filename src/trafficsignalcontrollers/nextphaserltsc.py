@@ -73,14 +73,12 @@ class NextPhaseRLTSC(TrafficSignalController):
             # and one hot hot vector encoding the previous phase
             # state = np.concatenate( [self.get_state(), self.phase_to_one_hot[self.phase]] )[np.newaxis,...]
             if self.show_info:
-                print(8888888888888888888)
                 print("start")
                 print("self.get_state() is:", self.get_state())
             state = np.concatenate([self.get_state(), self.phase_to_one_hot[self.phase]])
             if self.show_info:
                 print("state is:", state)
                 print("end")
-                print(8888888888888888888)
             if self.acting:
                 terminal = False
                 self.store_experience(state, terminal)

@@ -56,7 +56,6 @@ def parse_cl_args():
 def graph_hyper_params(labels, colours, fp, save_dir):
     tsc = os.listdir(fp)
     tsc_hp = {}
-    print("ttttttt is", tsc)
     # get data
     for t in tsc:
         tsc_fp = fp + t + '/'

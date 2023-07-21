@@ -98,7 +98,6 @@ def gen_neural_networks(args, netdata, tsctype, tsc_ids, learner, load, n_hidden
                 elif tsctype == 'ddpg':
                     for n in neural_nets[tsc]:
                         path = '/'.join(path_dirs + [n, tsc])
-                        print("ttttttttttttttttttttttttt path is ", path)
                         neural_nets[tsc][n].load_weights(path)
 
             print('... successfully loaded ' + str(tsctype) + ' parameters')

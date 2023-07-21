@@ -128,6 +128,15 @@ class TrafficSignalController:
             print("yyyyy next phase is ", next_phase)
             acting_phase = self.reorder_phase(next_phase)
             self.conn.trafficlight.setRedYellowGreenState(self.id, acting_phase)
+            self.conn.edge.setMaxSpeed("gneE1", 66.6)
+            self.conn.lane.setMaxSpeed("gneE1_0", 77.7)
+
+            self.conn.lane.setDisallowed("gneE1_0", ["all"])
+            self.conn.edge.setDisallowed("-gneE17", ["all"])
+
+            self.conn.lane.setAllowed("gneE1_0", ["all"])
+            self.conn.edge.setAllowed("-gneE17", ["all"])
+
             self.phase = next_phase
             self.phase_time = self.next_phase_duration()
         self.phase_time -= 1
@@ -210,7 +219,6 @@ class TrafficSignalController:
         phase_1, phase_2, phase_3, phase_4, phase_5, phase_6, phase_7, phase_8 = "", "", "", "", "", "", "", ""
         for idx, road in enumerate(sorted_dict):
             if len(sorted_dict) == 4:
-                print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
                 if idx == 0 or idx == 2:
                     phase_1 += road_phases[road][0]
                     phase_2 += road_phases[road][1]
@@ -238,7 +246,6 @@ class TrafficSignalController:
                     phase_5 += road_phases[road][3]
                     phase_7 += road_phases[road][3]
             elif len(sorted_dict) == 3:
-                print("ppppppppppppppppppppppppppppppppppppp")
                 phase_1 += road_phases[road][3]
                 phase_2 += road_phases[road][3]
                 phase_3 += road_phases[road][3]
@@ -257,7 +264,6 @@ class TrafficSignalController:
                     phase_7 += road_phases[road][3]
                     phase_8 += road_phases[road][2]
             else:
-                print("111111111111111111111111111111111111")
                 phase_1 += road_phases[road][2]
                 phase_2 += road_phases[road][2]
                 phase_3 += road_phases[road][2]

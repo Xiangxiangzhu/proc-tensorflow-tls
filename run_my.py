@@ -5,8 +5,8 @@ from src.distprocs import DistProcs
 
 
 def main():
-    use_double = True
-    # use_double = False
+    # use_double = True
+    use_double = False
 
     start_t = time.time()
     print('start running main...')
@@ -20,12 +20,12 @@ def main():
         args.nogui = True
         args.mode = 'test'
     else:
-        args.sim = 'single'
-        # args.sim = 'double'
+        # args.sim = 'single'
+        args.sim = 'double'
         args.n = 1
         args.tsc = 'dqn'
         args.load = False
-        args.nogui = True
+        args.nogui = False
         args.mode = 'test'
 
     print(args)

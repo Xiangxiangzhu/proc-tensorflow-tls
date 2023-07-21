@@ -45,15 +45,12 @@ def graph_data(data, labels, metric):
 
 def graph_metric(path, metric):
     newest_fp = [fp for fp in sorted(os.listdir(path)) if metric in fp][-1]
-    print(111111111111111111)
     print(metric)
     print(newest_fp)
     fp = path + newest_fp
-    print("22222222222 is:", fp)
     labels = get_headers(fp)
     data = get_data(fp)
     print(data)
-    print(111111111111111111)
     graph_data(data, labels, metric)
 
 

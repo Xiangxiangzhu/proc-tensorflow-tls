@@ -24,9 +24,7 @@ def main():
     args.mode = 'train'
     args.gmin = 5
 
-    print("11111111111111111111")
     print(args)
-    print("11111111111111111111")
 
     distprocs = DistProcs(args, args.tsc, args.mode)
     distprocs.run()
