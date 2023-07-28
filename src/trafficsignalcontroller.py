@@ -127,15 +127,30 @@ class TrafficSignalController:
             next_phase = self.next_phase()
             print("yyyyy next phase is ", next_phase)
             acting_phase = self.reorder_phase(next_phase)
+            # change phase of a given tl
             self.conn.trafficlight.setRedYellowGreenState(self.id, acting_phase)
+
+            # change allowed speed for any edge or lane
             self.conn.edge.setMaxSpeed("gneE1", 66.6)
             self.conn.lane.setMaxSpeed("gneE1_0", 77.7)
 
+            # close given lanes or edges
             self.conn.lane.setDisallowed("gneE1_0", ["all"])
             self.conn.edge.setDisallowed("-gneE17", ["all"])
 
+            # reopen given lanes or edges
             self.conn.lane.setAllowed("gneE1_0", ["all"])
             self.conn.edge.setAllowed("-gneE17", ["all"])
+
+            # disable given types of vehcles for any lane or edge
+            self.conn.lane.setDisallowed("gneE1_1", ["private"])
+
+
+            # self.conn.edge.setDisallowed("gneE1_2", ["all"])
+            # self.conn.edge.setDisallowed("-gneE1", ["all"])
+
+
+
 
             self.phase = next_phase
             self.phase_time = self.next_phase_duration()

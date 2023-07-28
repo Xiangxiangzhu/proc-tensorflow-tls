@@ -24,7 +24,7 @@ def get_sim(sim_str):
         net_fp = 'networks/double.net.xml'
     elif sim_str == 'test':
         cfg_fp = 'networks/test.sumocfg'
-        net_fp = 'networks/acosta_buslanes.net.xml'
+        net_fp = 'networks/demo_test.net.xml'
     return cfg_fp, net_fp
 
 

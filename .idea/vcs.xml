@@ -3,5 +3,9 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/networks/sumo-scenarios" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/networks/sumo-scenarios/BadHersfeld/osm/SUMOActivityGen" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/networks/sumo-scenarios/BadHersfeld/prt" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/networks/sumo-scenarios/sumo-berlin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/networks/sumo-scenarios/sumo_ingolstadt" vcs="Git" />
   </component>
 </project>
