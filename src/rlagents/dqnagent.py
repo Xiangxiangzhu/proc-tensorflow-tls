@@ -22,6 +22,13 @@ class DQNAgent(RLAgent):
             ###act greedily
             q_state = self.networks.forward(state[np.newaxis, ...], 'online')
             action = np.argmax(q_state)
+
+            print("$$$$$$$$$$$$$$$$$$$$$$$")
+            print("origin state is ", state)
+            print("temp state is ", state[np.newaxis, ...])
+            print("q_state is", q_state)
+            print("$$$$$$$$$$$$$$$$$$$$$$$")
+
         ###return action integer
         return action
 

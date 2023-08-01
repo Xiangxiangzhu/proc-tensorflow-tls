@@ -26,7 +26,7 @@ def main():
         args.tsc = 'dqn'
         args.load = False
         args.nogui = False
-        args.mode = 'train'
+        args.mode = 'test'
 
     print(args)
 
